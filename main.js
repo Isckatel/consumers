@@ -1,4 +1,6 @@
-import Consumer from "./models/consumer.js";
+import { objToConsumers } from './functions.js';
+import { getData } from './data.js';
 
-const user1 = new Consumer(0, "Алекс", 1, 1234567890123);
-console.log(user1);
+let cons2 = objToConsumers(getData());
+
+console.log(cons2);

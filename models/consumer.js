@@ -60,6 +60,12 @@ class Consumer {
             this.#number = value;
         }    
     }
-
+    isValid() {
+        if (this.#id !== -1 && this.#name !== " " && this.#type !== -1 && this.#number !== -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 export default  Consumer;
