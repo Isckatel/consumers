@@ -1,6 +1,9 @@
 import { objToConsumers } from './functions.js';
 import { getData } from './data.js';
+import { getTab} from './components/table.js';
 
-let cons2 = objToConsumers(getData());
+let arrConsumers = objToConsumers(getData());
 
-console.log(cons2);
+$("main").html(getTab(arrConsumers));
+
+console.log(arrConsumers);
