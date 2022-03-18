@@ -1,0 +1,28 @@
+.consumerTab {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid silver;
+    width: 685px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.contentRow, .title {
+    display: flex;    
+}
+
+.nameColumn, .typeColunm, .numberColumn   {
+    border: 1px solid silver;
+}
+
+.nameColumn {
+    width: 500px;
+}
+
+.typeColunm {
+    width: 35px;
+}
+
+.numberColumn {
+    width: 150px;
+}

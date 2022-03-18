@@ -4,7 +4,7 @@ export function getTab(arrConsumers) {
         consumerRow = consumerRow 
         + `<div class="contentRow">
         <div class="nameColumn">${elem.name}</div>
-        <div class="typeColunm">${elem.type}</div>
+        <div class="typeColunm" title="${elem.type == 1 ? 'Физическое лицо' : 'Юридическое лицо'}" >${elem.type == 1 ? "Ф" : "Ю"}</div>
         <div class="numberColumn">${elem.number}</div>
     </div>`
     });

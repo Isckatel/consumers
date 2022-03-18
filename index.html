@@ -6,20 +6,43 @@
     <meta name="author" content="html5css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/master.css"> 
+    <link rel="stylesheet" href="components/table.css">
+    <link rel="stylesheet" href="components/newConsumer.css">
     <title>Потребители</title>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <a href="#">Главная</a>
+        <h1>Потребители</h1>
       </header>
+      <menu>
+        <div class="newConsumer">Новый потребитель</div>
+      </menu>
       <main>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad adipisci voluptatum quisquam distinctio sed vitae similique illo laudantium quibusdam aut nobis, cupiditate ex illum sunt! Exercitationem adipisci laudantium iure voluptatum?</p>
+        Проблемы с нашим сервером, зайдите позже! 
       </main>
       <footer>
         <p>Контакты</p>
       </footer>
     </div>
+    <div class ='modal'></div>
+    <div class="win">    
+      <h3>Новая задача</h3>
+      <form name="modalForm">            
+        <input  placeholder="Название задачи.." /><br/>       
+        <div class="alert">            
+        Не указана задача
+        </div>
+        <select name="titles">
+              <option>
+                Физическое лицо
+              </option>
+              <option>Новая категория</option>
+          </select><br/>
+        <button class="buttCancel" style="background-color: silver; color:white;">Отмена</button>
+        <button class="buttOK">ОК</button>            
+      </form> 
+    </div>    
   <script src="libraries/jquery-3.6.0.slim.min.js"> </script>
   <script type="module" src="models/consumer.js"> </script>
   <script type="module" srs="components/table.js"></script>  

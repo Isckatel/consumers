@@ -6,4 +6,10 @@ let arrConsumers = objToConsumers(getData());
 
 $("main").html(getTab(arrConsumers));
 
-console.log(arrConsumers);
+$(".newConsumer").on("click", ()=>{
+    $(".modal, .win").css("display","block");
+});
+
+$(".buttCancel, .buttOK").on("click",()=>{
+    $(".modal, .win").css("display","none");
+});
