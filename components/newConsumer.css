@@ -40,8 +40,8 @@
 
 .win {
     display: none;
-    width: 400px;
-    height: 365px;
+    width: 405px;
+    height: 200px;
     padding: 30px;
     background: rgb(253, 253, 253);
     border: 2px solid white;
@@ -58,7 +58,8 @@
 }
 
 input {
-    margin: 10px 0;    
+    margin: 10px 0;
+    border: 1px solid black;    
 }
 
 select {
@@ -70,13 +71,14 @@ select {
 
 button {
     cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .buttCancel {
     margin-top: 10px;
     margin-right: 10px;
     width:190px;
-    z-index: 901;
     padding: 6px;
 }
 
@@ -84,7 +86,6 @@ button {
     margin-top: 10px;
     margin-right: 10px;
     width:190px;
-    z-index: 901;
     padding: 6px;
 }
 

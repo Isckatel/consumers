@@ -27,20 +27,22 @@
     </div>
     <div class ='modal'></div>
     <div class="win">    
-      <h3>Новая задача</h3>
+      <h3>Новый потребитель</h3>
       <form name="modalForm">            
-        <input  placeholder="Название задачи.." /><br/>       
-        <div class="alert">            
-        Не указана задача
+        <input id="inputName"  placeholder="Имя потребителя..." /><br/>       
+        <div class="alert inputNameAlert">            
+        Не указано имя
         </div>
-        <select name="titles">
-              <option>
-                Физическое лицо
-              </option>
-              <option>Новая категория</option>
-          </select><br/>
-        <button class="buttCancel" style="background-color: silver; color:white;">Отмена</button>
-        <button class="buttOK">ОК</button>            
+        <select id="selectType" name="titles">
+              <option>Физическое лицо</option>
+              <option>Юридическое лицо</option>
+        </select><br/>
+        <input id="inputNumber" placeholder="Номер потребителя..." /><br/>
+        <div class="alert inputNumberAlert">
+          Не указан номер
+        </div>  
+        <button type="button" class="buttCancel" style="background-color: silver; color:white;">Отмена</button>
+        <button type="button" class="buttOK">ОК</button>            
       </form> 
     </div>    
   <script src="libraries/jquery-3.6.0.slim.min.js"> </script>
