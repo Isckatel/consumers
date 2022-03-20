@@ -21,9 +21,15 @@
 }
 
 .typeColunm {
-    width: 35px;
+    width: 50px;
 }
 
 .numberColumn {
     width: 150px;
+}
+
+.inputName {
+    margin: 0;
+    border: 0;
+    width: 100%;
 }

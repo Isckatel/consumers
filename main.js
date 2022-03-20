@@ -1,6 +1,6 @@
 import { objToConsumers } from './functions.js';
 import { getData } from './data.js';
-import { getTab} from './components/table.js';
+import { getTab, dblclickInput, focusoutInput} from './components/table.js';
 import {newConsumer} from './components/newConsumer.js';
 
 let arrConsumers = objToConsumers(getData());
@@ -21,17 +21,6 @@ $(".buttOK").on("click",()=>{
     newConsumer(arrConsumers);
     $("main").html(getTab(arrConsumers));
 });
-//Отображем поле ввода для редактирования элемента
-$(document).on("dblclick", ".nameColumn", (event)=>{
-    let inEdit = $('<input/>');
-    let toEdit = $(event.target);
-    toEdit.html( inEdit.val( toEdit.text() ) );
-    inEdit.focus().select();
-});
-//Применение изменений
-$(document).on('focusout keypress', '.nameColumn input', function(event) {
-    if( event.which === 13 || event.type === 'focusout') {
-        let val = $(this).val();
-        $(this).closest('.nameColumn').text( val );
-    }
-});
+
+dblclickInput();//Отображем поле ввода для редактирования элемента в таблице
+focusoutInput();//Применение изменений после ввода в таблице
