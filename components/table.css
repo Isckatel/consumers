@@ -12,7 +12,8 @@
     display: flex;    
 }
 
-.nameColumn, .typeColunm, .numberColumn   {
+.nameColumn, .typeColunm, .numberColumn,
+.nameTitle, .numberTitle, .typeTitle   {
     border: 1px solid silver;
 }
 
@@ -25,6 +26,18 @@
 }
 
 .numberColumn {
+    width: 150px;
+}
+
+.nameTitle {
+    width: 500px;
+}
+
+.typeTitle {
+    width: 50px;
+}
+
+.numberTitle {
     width: 150px;
 }
 

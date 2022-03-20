@@ -11,9 +11,9 @@ export function getTab(arrConsumers) {
     return `
     <div class="consumerTab">
         <div class="title">
-            <div class="nameColumn title">Имя</div>
-            <div class="typeColunm title">Тип</div>
-            <div class="numberColumn title">Номер потребителя</div>        
+            <div class="nameTitle title">Имя</div>
+            <div class="typeTitle title">Тип</div>
+            <div class="numberTitle title">Номер потребителя</div>        
         </div>
         ${consumerRow}    
     </div>`;
@@ -78,6 +78,21 @@ export const EditConsumer = () => {
     focusoutSelect();
 }
 
+export const FilterType = (arrConsumers) => {
+    $(".typeTitle").on("click", (event)=>{
+        const filterConsumers = [...arrConsumers];
+        let x = $(event.target);
+        if ($(event.target).val()=="Тип" || $(this).val()=="Ю") {
+            filterConsumers.filter(c => c.type === "Ф" );
+            getTab(filterConsumers);
+            $(event.target).html("Ф");
+        } else {
+            filterConsumers.filter(c => c.type === "Ю" );
+            getTab(filterConsumers);
+            $(event.target).html("Ю");  
+        }
+    })
+}
 // export const dblclickFieldNumber = () => {
 //     return dblclickField("numberColumn","inputNumber");
 // } 
