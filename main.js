@@ -1,6 +1,7 @@
 import { objToConsumers } from './functions.js';
 import { getData } from './data.js';
-import { getTab, dblclickInput, focusoutInput} from './components/table.js';
+import { getTab, dblclickFieldName, focusoutInputName, dblclickFieldNumber,
+     focusoutInputNumber} from './components/table.js';
 import {newConsumer} from './components/newConsumer.js';
 
 let arrConsumers = objToConsumers(getData());
@@ -22,5 +23,9 @@ $(".buttOK").on("click",()=>{
     $("main").html(getTab(arrConsumers));
 });
 
-dblclickInput();//Отображем поле ввода для редактирования элемента в таблице
-focusoutInput();//Применение изменений после ввода в таблице
+//Отображем поле ввода для редактирования элемента в таблице
+dblclickFieldNumber();
+dblclickFieldName();
+//Применение изменений после ввода в таблице
+focusoutInputName();
+focusoutInputNumber(); 

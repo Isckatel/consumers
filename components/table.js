@@ -19,23 +19,42 @@ export function getTab(arrConsumers) {
     </div>`;
 }
 
+
 //Отображем поле ввода для редактирования элемента
-export const dblclickInput = () => {
-    return ($(document).on("dblclick", ".nameColumn", (event)=>{
-            let inEdit = $('<input class="inputName"/>');
+function dblclickField(calssName, inputClassName) {
+    return ($(document).on("dblclick", "."+calssName, (event)=>{
+            let inputElement = '<input class="'+ inputClassName + '"/>'
+            let inEdit = $(inputElement);
             let toEdit = $(event.target);
             toEdit.html( inEdit.val( toEdit.text() ) );
             inEdit.focus().select();
         })
     );
 }
+
 //Применение изменений после ввода
-export const focusoutInput = () => {
-    return ($(document).on('focusout keypress', '.nameColumn input', function(event) {
+function focusoutInputSome(className) {
+    return ($(document).on("focusout keypress", "."+className+" input", function(event) {
         if( event.which === 13 || event.type === 'focusout') {
             let val = $(this).val();
-            $(this).closest('.nameColumn').text( val );
+            $(this).closest("."+className).text( val );
         }
         })
     );
+}
+
+export const dblclickFieldNumber = () => {
+    return dblclickField("numberColumn","inputNumber");
+} 
+
+export const dblclickFieldName = () => {
+    return dblclickField("nameColumn","inputName");
+} 
+
+export const focusoutInputName = () => {
+    return focusoutInputSome("nameColumn");
+}
+
+export const focusoutInputNumber = () => {
+    return focusoutInputSome("numberColumn");
 }

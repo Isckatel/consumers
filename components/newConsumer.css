@@ -57,7 +57,7 @@
     opacity: 1; 
 }
 
-input {
+form input {
     margin: 10px 0;
     border: 1px solid black;    
 }

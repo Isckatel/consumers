@@ -33,3 +33,9 @@
     border: 0;
     width: 100%;
 }
+
+.inputNumber {
+    margin: 0;
+    border: 0;
+    width: 150px;
+}
