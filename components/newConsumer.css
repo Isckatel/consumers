@@ -62,7 +62,7 @@ form input {
     border: 1px solid black;    
 }
 
-select {
+.selectType {
     min-width: 150px;
     max-width: 200px;
     width: 100%;
