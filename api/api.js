@@ -55,6 +55,21 @@ export default class Api {
             console.log('Fetch Error :-S', err);  
         });
     }
+    async newConsumerAsync(body) {
+        const request = new Request(this.basURL, { //+"todos"
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {'Content-Type': 'application/json;charset=utf-8'}
+        });
+        try {
+            let response = await fetch(request);
+            let data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     editConsumer(data) {
         const request = new Request(this.basURL, { //+"todos"
             method: 'PUT',
