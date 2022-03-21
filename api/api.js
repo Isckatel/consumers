@@ -24,6 +24,16 @@ export default class Api {
         });
     }
 
+    async getDataAsync() {
+        try {
+            let response = await fetch(this.basURL);
+            let data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }        
+    }
+
     newConsumer(data) {
         const request = new Request(this.basURL, { //+"todos"
             method: 'POST',

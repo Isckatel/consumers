@@ -1,6 +1,6 @@
 import Consumer from './models/consumer.js';
 
-export function objToConsumers(arr) {
+export function arrToConsumers(arr) {
     let consumers = [];
     for(let i=0; i < arr.length; i++) {
        let tmpConsumer = new Consumer (...Object.values(arr[i]));
