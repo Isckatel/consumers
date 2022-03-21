@@ -1,7 +1,8 @@
 
 
 export default class Api {
-    basURL="https://blooming-dawn-85383.herokuapp.com/";
+    // basURL="https://blooming-dawn-85383.herokuapp.com/";
+    basURL="";
 
     getData() {
         fetch(this.basURL)  
@@ -10,16 +11,16 @@ export default class Api {
             if (response.status !== 200) {  
                 console.log('Возникла проблема. Код состояния: ' +  
                 response.status);  
-                return;  
-            }
-              
+                return {};  
+            }              
             response.json().then(function(data) {  
-                console.log(data);  
+                return data;  
             });  
             }  
         )  
         .catch(function(err) {  
-            console.log('Fetch Error :-S', err);  
+            console.log('Fetch Error :-S', err);
+            return {};  
         });
     }
 
@@ -81,5 +82,12 @@ export default class Api {
         .catch(function(err) {  
             console.log('Fetch Error :-S', err);  
         });
-    }    
+    }
+    isEnabled()  {
+        if (this.basURL=="") {
+            return false;
+        } else {
+            return true;
+        }
+    }  
 }

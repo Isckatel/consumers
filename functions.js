@@ -1,11 +1,11 @@
 import Consumer from './models/consumer.js';
 
-export function objToConsumers(Obj) {
-    let consumersObj = [];
-    for(let i=0; i < Obj?.consumers.length; i++) {
-       let tmpConsumer = new Consumer (...Object.values(Obj?.consumers[i]));
-       if (tmpConsumer.isValid()) consumersObj.push(tmpConsumer);
+export function objToConsumers(arr) {
+    let consumers = [];
+    for(let i=0; i < arr.length; i++) {
+       let tmpConsumer = new Consumer (...Object.values(arr[i]));
+       if (tmpConsumer.isValid()) consumers.push(tmpConsumer);
     }
-    return consumersObj;
+    return consumers;
 }
  

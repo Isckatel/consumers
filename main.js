@@ -5,8 +5,15 @@ import { ShowModalNewConsumer } from './components/newConsumer.js';
 import  Api from "./api/api.js";
 
 const api = new Api();
+let arrConsumers = [];
 
-let arrConsumers = objToConsumers(getData());
+if (api.isEnabled()) {
+    arrConsumers = []
+} else {
+    arrConsumers = objToConsumers(getData());
+}
+
+
 
 $("main").html(getTab(arrConsumers));
 
