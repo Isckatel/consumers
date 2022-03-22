@@ -28,24 +28,21 @@
     <div class ='modal'></div>
     <div class="win">    
       <h3>Новый потребитель</h3>
-      <form name="modalForm">            
-        <input id="inputName"  placeholder="Имя потребителя..." /><br/>       
-        <div class="alert inputNameAlert">            
-        Не указано имя
-        </div>
-        <select id="selectType" name="titles">
+      <form id="modalForm" name="modalForm">            
+        <input name="inputName" id="inputName"  placeholder="Имя потребителя..." />       
+        <select id="selectType" name="selectType">
               <option value="1">Физическое лицо</option>
               <option value="2">Юридическое лицо</option>
         </select><br/>
-        <input id="inputNumber" placeholder="Номер потребителя..." /><br/>
-        <div class="alert inputNumberAlert">
-          Не указан номер
-        </div>  
-        <button type="button" class="buttCancel" style="background-color: silver; color:white;">Отмена</button>
-        <button type="button" class="buttOK">ОК</button>            
+        <input id="inputNumber" name="inputNumber" placeholder="Номер потребителя..." /> 
+        <div>
+          <button type="button" class="buttCancel" style="background-color: silver; color:white;">Отмена</button>
+          <button type="button" class="buttOK">ОК</button>
+        </div>            
       </form> 
     </div>    
   <script src="libraries/jquery-3.6.0.slim.min.js"> </script>
+  <script src="libraries/jquery.validate.js"> </script>
   <script type="module" src="models/consumer.js"> </script>
   <script type="module" srs="components/table.js"></script>  
   <script type="module" src="main.js"></script>

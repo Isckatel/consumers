@@ -106,3 +106,8 @@
     width:40px;
     padding: 6px;
 }
+
+.error {
+    color: red;
+    width: 200px;
+}

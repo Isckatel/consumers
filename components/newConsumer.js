@@ -30,13 +30,56 @@ export const showModalNewConsumer = (arrConsumers) => {
         $(".modal, .win").css("display","block");
     });
     //Скрыть окно создания
-    $(".buttCancel, .buttOK").on("click",()=>{
+    $(".buttCancel").on("click",()=>{
         $(".modal, .win").css("display","none");
     });
+
+    let successValid = false;
+    
+    $('#inputNumber').keyup(function () { 
+        this.value = this.value.replace(/[^0-9\.]/g,'');
+    });
+
+    $("#modalForm").validate({
+        rules: {
+            inputName: {
+                required: true,
+                minlength: 1,
+                maxlength: 255
+            },
+            inputNumber: {
+                required: true,
+                minlength: 13,
+                maxlength: 13,
+                number: true
+            }
+        },
+        messages: {
+            inputName: {
+                required: "Пожалуйста, введите имя потребителя.",
+                minlength: "Имя не должно быть короче 1 символа.",
+                maxlength: "Имя не должно быть длиннее 255 символов."
+            },
+            inputNumber: {
+                required: "Пожалуйста, введите номер потребителя.",
+                minlength: "Имя не должно быть короче 13 символа.",
+                maxlength: "Имя не должно быть длиннее 13 символов.",
+                number: "Номер потребителя должен состоять только из цифр."
+            } 
+        },
+        success: () => successValid = true
+    });
+
     //Добавляем созданного потребителя в массив
-    $(".buttOK").on("click",()=>{
-        $(".modal, .win").css("display","none");
+    $(".buttOK").on("click",()=>{        
         if (!$("#inputName").val() && !$("#inputNumber").val()) return;
-        newConsumer(arrConsumers);
+        if (successValid) {
+            $(".modal, .win").css("display","none");
+            newConsumer(arrConsumers);
+        }
     });
+}
+
+export const validateModal = () => {
+    
 }
