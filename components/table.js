@@ -74,13 +74,15 @@ function focusoutInputSome(className, propertyName, arrConsumers) {
 function dblclickSelect() {
     return ($(document).on("dblclick", ".typeColunm", (event)=>{
             let selectElement = `<select class="editSelectType">
-                <option>Ф</option>
-                <option>Ю</option>
+                <option value="1">Ф</option>
+                <option value="2">Ю</option>
             </select>`
             let inEdit = $(selectElement);
             let toEdit = $(event.target);
+            let txt = toEdit.text();
             toEdit.html( inEdit);
-            $('.editSelectType option[value="'+toEdit.text()+'"]').prop('selected', true);
+            // $('.editSelectType option[value=2]').prop('selected', true);            
+            $('.editSelectType option:contains("'+txt+'")').prop('selected', true);
             inEdit.focus().select();
         })
     );
@@ -90,7 +92,7 @@ function focusoutSelect() {
     return ($(document).on("focusout keypress", ".typeColunm select", function(event) {
         if( event.which === 13 || event.type === 'focusout') {
             let val = $(this).val();
-            $(this).closest("typeColunm").text( val );
+            $(this).closest(".typeColunm").html(val==1? "Ф": "Ю");
         }
         })
     );
