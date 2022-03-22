@@ -91,25 +91,25 @@ export const editConsumer = () => {
 
 export const deleteConsumer = (arrConsumers) => {
     let id;
-    $(".delButt").on("click", (e)=>{
+    $(document).on("click", ".delButt", (e)=>{
         $(".modalDel").css("display","block");
         let el = $(e.target).closest(".delColumn");
         let strId = el.attr("name");
         id = Number(strId);
     });
     //Скрыть окно создания
-    $(".buttCancelDel").on("click",()=>{
+    $(document).on("click", ".buttCancelDel" ,()=>{
         $(".modalDel").css("display","none");
     });
 
     //Удаляем потребителя из массива
-    $(".buttOKDel").on("click",()=>{
+    $(document).on("click",".buttOKDel",()=>{
         $(".modalDel").css("display","none");
         
         if (api.isEnabled()) {
             api.deleteConsumerAsync(id).then((ok)=>{
                 if (ok) {
-                    let indexArr = arrConsumers.find(con => con.id == id).id;
+                    let indexArr = arrConsumers.findIndex(con => con.id === id);
                     arrConsumers.splice(indexArr,1);
                     $("main").html(getTab(arrConsumer));
                 } else {
@@ -117,7 +117,7 @@ export const deleteConsumer = (arrConsumers) => {
                 }
             });
         } else {
-            let indexArr = arrConsumers.find(con => con.id == id).id;
+            let indexArr = arrConsumers.findIndex(con => con.id === id);
             arrConsumers.splice(indexArr,1);
             $("main").html(getTab(arrConsumers));
         }
