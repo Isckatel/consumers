@@ -16,7 +16,7 @@ export function getTab(arrConsumers) {
     <div class="consumerTab">
         <div class="title">
             <div class="nameTitle title">Имя</div>
-            <div class="typeTitle title">Тип</div>
+            <div class="typeTitle title" name="all">Тип</div>
             <div class="numberTitle title">Номер потребителя</div>
             <div class="delTitle title"></div>        
         </div>
@@ -159,17 +159,20 @@ export const deleteConsumer = (arrConsumers) => {
 }
 
 export const filterType = (arrConsumers) => {
-    $(".typeTitle").on("click", (event)=>{
-        const filterConsumers = [...arrConsumers];
-        let x = $(event.target);
-        if ($(event.target).val()=="Тип" || $(this).val()=="Ю") {
-            filterConsumers.filter(c => c.type === "Ф" );
-            getTab(filterConsumers);
-            $(event.target).html("Ф");
-        } else {
-            filterConsumers.filter(c => c.type === "Ю" );
-            getTab(filterConsumers);
-            $(event.target).html("Тип: Ю");  
+    $(document).on("click",".typeTitle", (event)=>{
+        let filterConsumers = [...arrConsumers];
+        let typeCon = $(event.target).attr("name");
+        if (typeCon=="all" ) {
+            filterConsumers = filterConsumers.filter(c => c.type === 1);
+            $("main").html(getTab(filterConsumers));
+            $(".typeTitle").attr("name","1");
+        } else if (typeCon=="1") {
+            filterConsumers = filterConsumers.filter(c => c.type === 2);
+            $("main").html(getTab(filterConsumers));
+            $(".typeTitle").attr("name","2");  
+        } else if (typeCon=="2") {
+            $("main").html(getTab(arrConsumers));
+            $(".typeTitle").attr("name","all");
         }
     })
 }
