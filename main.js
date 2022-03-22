@@ -21,7 +21,7 @@ showModalNewConsumer(arrConsumers);
 
 deleteConsumer(arrConsumers);
 
-editConsumer();
+editConsumer(arrConsumers);
 
 filterType(arrConsumers);
 

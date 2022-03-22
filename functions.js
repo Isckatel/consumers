@@ -8,4 +8,3 @@ export function arrToConsumers(arr) {
     }
     return consumers;
 }
- 

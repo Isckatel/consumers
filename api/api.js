@@ -91,6 +91,19 @@ export default class Api {
             console.log('Fetch Error :-S', err);  
         });
     }
+    async editConsumerAsync(data) {
+        const request = new Request(this.basURL, { //+"todos"
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {'Content-Type': 'application/json;charset=utf-8'}
+        });
+        try {
+            let response = await fetch(request);            
+            return response.ok;
+        } catch (error) {
+            console.error(error);
+        }           
+    }
     deleteConsumer(id){
         fetch(this.basURL+id,{
             method: 'DELETE'
@@ -111,8 +124,7 @@ export default class Api {
     async deleteConsumerAsync(id){
         try {
             let response = await fetch(this.basURL+id, {method: 'DELETE'});
-            let ok = await response.ok;
-            return ok;
+            return response.ok;
         } catch (error) {
             console.error(error);
         }        

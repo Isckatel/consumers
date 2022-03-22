@@ -1,12 +1,11 @@
 import Api from "../api/api.js";
-
 const api = new Api();
 
 export function getTab(arrConsumers) {
     let consumerRow = "";
     arrConsumers.forEach(elem => {
         consumerRow = consumerRow 
-        + `<div class="contentRow">
+        + `<div class="contentRow" name="${elem.id}">
         <div class="nameColumn">${elem.name}</div>
         <div class="typeColunm" title="${elem.type == 1 ? 'Физическое лицо' : 'Юридическое лицо'}" >${elem.type == 1 ? "Ф" : "Ю"}</div>
         <div class="numberColumn">${elem.number}</div>
@@ -44,14 +43,31 @@ function dblclickField(calssName, inputClassName) {
 }
 
 //Применение изменений после ввода
-function focusoutInputSome(className) {
+function focusoutInputSome(className, propertyName, arrConsumers) {
     return ($(document).on("focusout keypress", "."+className+" input", function(event) {
         if( event.which === 13 || event.type === 'focusout') {
             let val = $(this).val();
-            $(this).closest("."+className).text( val );
+            let id = Number($(this).closest(".contentRow").attr("name"));
+            let obj = arrConsumers.find(con => con.id === id);
+            obj[propertyName] =  isNaN(val) ? val : Number(val);
+            if (api.isEnabled()) {
+                api.editConsumerAsync(obj).then((ok)=>{
+                    if (ok) {
+                        let indexArr = arrConsumers.findIndex(con => con.id === id);
+                        arrConsumers[indexArr] = obj;
+                        $(this).closest("."+className).text( val );
+                    } else {
+                        console.log("Сервер не подтвердил изменения");
+                        $(this).closest("."+className).text( arrConsumers[indexArr][propertyName]);
+                    }
+                });
+            } else {
+                let indexArr = arrConsumers.findIndex(con => con.id === id);
+                arrConsumers[indexArr] = obj;
+                $(this).closest("."+className).text( val );
+            }  
         }
-        })
-    );
+    }));
 }
 
 //Отображем выбор типа потребителя 
@@ -80,11 +96,11 @@ function focusoutSelect() {
     );
 }
 
-export const editConsumer = () => {
-    dblclickField("numberColumn","inputNumber");
-    dblclickField("nameColumn","inputName");
-    focusoutInputSome("nameColumn");
-    focusoutInputSome("numberColumn");
+export const editConsumer = (arrConsumers) => {
+    dblclickField("numberColumn", "inputNumber");
+    dblclickField("nameColumn", "inputName");
+    focusoutInputSome("nameColumn", "name", arrConsumers);
+    focusoutInputSome("numberColumn", "number", arrConsumers);
     dblclickSelect();
     focusoutSelect();
 }
