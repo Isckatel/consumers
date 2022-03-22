@@ -80,22 +80,38 @@ function dblclickSelect() {
             let inEdit = $(selectElement);
             let toEdit = $(event.target);
             let txt = toEdit.text();
-            toEdit.html( inEdit);
-            // $('.editSelectType option[value=2]').prop('selected', true);            
+            toEdit.html( inEdit);                     
             $('.editSelectType option:contains("'+txt+'")').prop('selected', true);
             inEdit.focus().select();
         })
     );
 }
 //Применение изменений после выбора типа
-function focusoutSelect() {
+function focusoutSelect(arrConsumers) {
     return ($(document).on("focusout keypress", ".typeColunm select", function(event) {
         if( event.which === 13 || event.type === 'focusout') {
             let val = $(this).val();
-            $(this).closest(".typeColunm").html(val==1? "Ф": "Ю");
+            let id = Number($(this).closest(".contentRow").attr("name"));
+            let obj = arrConsumers.find(con => con.id === id);
+            obj.type = Number(val);
+            if (api.isEnabled()) {
+                api.editConsumerAsync(obj).then((ok)=>{
+                    if (ok) {
+                        let indexArr = arrConsumers.findIndex(con => con.id === id)
+                        arrConsumers[indexArr] = obj;
+                        $(this).closest(".typeColunm").html(val==1? "Ф": "Ю");
+                    } else {
+                        $(this).closest(".typeColunm").html(arrConsumers[indexArr].type);
+                        console.log("Сервер не подтвердил изменения");
+                    }
+                });
+            } else {
+                let indexArr = arrConsumers.findIndex(con => con.id === id);
+                arrConsumers[indexArr] = obj;
+                $(this).closest(".typeColunm").html(val==1? "Ф": "Ю");
+            }
         }
-        })
-    );
+    }));
 }
 
 export const editConsumer = (arrConsumers) => {
@@ -104,7 +120,7 @@ export const editConsumer = (arrConsumers) => {
     focusoutInputSome("nameColumn", "name", arrConsumers);
     focusoutInputSome("numberColumn", "number", arrConsumers);
     dblclickSelect();
-    focusoutSelect();
+    focusoutSelect(arrConsumers);
 }
 
 export const deleteConsumer = (arrConsumers) => {
@@ -153,7 +169,7 @@ export const filterType = (arrConsumers) => {
         } else {
             filterConsumers.filter(c => c.type === "Ю" );
             getTab(filterConsumers);
-            $(event.target).html("Ю");  
+            $(event.target).html("Тип: Ю");  
         }
     })
 }
