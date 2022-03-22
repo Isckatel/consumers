@@ -1,7 +1,7 @@
 import { arrToConsumers } from './functions.js';
 import { getData } from './data.js';
-import { getTab, EditConsumer, FilterType} from './components/table.js';
-import { ShowModalNewConsumer } from './components/newConsumer.js';
+import { getTab, editConsumer, filterType, deleteConsumer} from './components/table.js';
+import { showModalNewConsumer } from './components/newConsumer.js';
 import  Api from "./api/api.js";
 
 const api = new Api();
@@ -17,11 +17,13 @@ if (api.isEnabled()) {
     $("main").html(getTab(arrConsumers));
 }
 
-ShowModalNewConsumer(arrConsumers);
+showModalNewConsumer(arrConsumers);
 
-EditConsumer();
+deleteConsumer(arrConsumers);
 
-FilterType(arrConsumers);
+editConsumer();
+
+filterType(arrConsumers);
 
 
 

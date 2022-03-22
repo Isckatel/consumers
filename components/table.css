@@ -13,7 +13,8 @@
 }
 
 .nameColumn, .typeColunm, .numberColumn,
-.nameTitle, .numberTitle, .typeTitle   {
+.nameTitle, .numberTitle, .typeTitle, 
+.delColumn, .delTitle {
     border: 1px solid silver;
 }
 
@@ -29,6 +30,16 @@
     width: 150px;
 }
 
+.delColunm {
+    width: 20px;
+}
+
+.delButt {
+    width: 20px;
+    color: red;
+    border-color: silver;
+}
+
 .nameTitle {
     width: 500px;
 }
@@ -40,6 +51,11 @@
 .numberTitle {
     width: 150px;
 }
+
+.delTitle {
+    width: 20px;
+}
+
 
 .inputName {
     margin: 0;
@@ -57,4 +73,35 @@
     margin: 0;
     border: 0;
     width: 50px;
+}
+
+.modalDel {
+    display: none;
+    width: 200px;
+    height: 70px;
+    padding: 30px;
+    background: rgb(253, 253, 253);
+    border: 2px solid silver;
+    border-radius: 10px;
+    position: absolute;
+    top: 30%;
+    right: 0;
+    bottom: 30%;
+    left: 0;
+    margin: auto;
+    z-index: 900;
+}
+
+.buttCancelDel {
+    margin-top: 10px;
+    margin-right: 10px;
+    width:130px;
+    padding: 6px;
+}
+
+.buttOKDel {
+    margin-top: 10px;
+    margin-right: 10px;
+    width:40px;
+    padding: 6px;
 }

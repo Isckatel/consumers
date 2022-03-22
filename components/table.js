@@ -1,3 +1,7 @@
+import Api from "../api/api.js";
+
+const api = new Api();
+
 export function getTab(arrConsumers) {
     let consumerRow = "";
     arrConsumers.forEach(elem => {
@@ -6,6 +10,7 @@ export function getTab(arrConsumers) {
         <div class="nameColumn">${elem.name}</div>
         <div class="typeColunm" title="${elem.type == 1 ? 'Физическое лицо' : 'Юридическое лицо'}" >${elem.type == 1 ? "Ф" : "Ю"}</div>
         <div class="numberColumn">${elem.number}</div>
+        <div class="delColumn" name="${elem.id}"><button class="delButt">X</buttnon></div>
     </div>`
     });
     return `
@@ -13,9 +18,15 @@ export function getTab(arrConsumers) {
         <div class="title">
             <div class="nameTitle title">Имя</div>
             <div class="typeTitle title">Тип</div>
-            <div class="numberTitle title">Номер потребителя</div>        
+            <div class="numberTitle title">Номер потребителя</div>
+            <div class="delTitle title"></div>        
         </div>
         ${consumerRow}    
+    </div>
+    <div class="modalDel">
+        <p>Вы действительно хотите удалить потребителя?</p>
+        <button type="button" class="buttCancelDel" style="background-color: silver; color:white;">Отмена</button>
+        <button type="button" class="buttOKDel">ОК</button>   
     </div>`;
 }
 
@@ -69,7 +80,7 @@ function focusoutSelect() {
     );
 }
 
-export const EditConsumer = () => {
+export const editConsumer = () => {
     dblclickField("numberColumn","inputNumber");
     dblclickField("nameColumn","inputName");
     focusoutInputSome("nameColumn");
@@ -78,7 +89,42 @@ export const EditConsumer = () => {
     focusoutSelect();
 }
 
-export const FilterType = (arrConsumers) => {
+export const deleteConsumer = (arrConsumers) => {
+    let id;
+    $(".delButt").on("click", (e)=>{
+        $(".modalDel").css("display","block");
+        let el = $(e.target).closest(".delColumn");
+        let strId = el.attr("name");
+        id = Number(strId);
+    });
+    //Скрыть окно создания
+    $(".buttCancelDel").on("click",()=>{
+        $(".modalDel").css("display","none");
+    });
+
+    //Удаляем потребителя из массива
+    $(".buttOKDel").on("click",()=>{
+        $(".modalDel").css("display","none");
+        
+        if (api.isEnabled()) {
+            api.deleteConsumerAsync(id).then((ok)=>{
+                if (ok) {
+                    let indexArr = arrConsumers.find(con => con.id == id).id;
+                    arrConsumers.splice(indexArr,1);
+                    $("main").html(getTab(arrConsumer));
+                } else {
+                    console.log("Сервер не подтвердил удаление потребителя");
+                }
+            });
+        } else {
+            let indexArr = arrConsumers.find(con => con.id == id).id;
+            arrConsumers.splice(indexArr,1);
+            $("main").html(getTab(arrConsumers));
+        }
+    });
+}
+
+export const filterType = (arrConsumers) => {
     $(".typeTitle").on("click", (event)=>{
         const filterConsumers = [...arrConsumers];
         let x = $(event.target);

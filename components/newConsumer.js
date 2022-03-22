@@ -24,7 +24,7 @@ export function newConsumer(arrConsum) {
     }    
 }
 
-export const ShowModalNewConsumer = (arrConsumers) => {
+export const showModalNewConsumer = (arrConsumers) => {
     //Показать окно создания 
     $(".newConsumer").on("click", ()=>{
         $(".modal, .win").css("display","block");

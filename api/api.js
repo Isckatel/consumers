@@ -108,6 +108,15 @@ export default class Api {
             console.log('Fetch Error :-S', err);  
         });
     }
+    async deleteConsumerAsync(id){
+        try {
+            let response = await fetch(this.basURL+id, {method: 'DELETE'});
+            let ok = await response.ok;
+            return ok;
+        } catch (error) {
+            console.error(error);
+        }        
+    }
     isEnabled()  {
         if (this.basURL=="") {
             return false;
