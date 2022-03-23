@@ -33,7 +33,15 @@ export function getTab(arrConsumers) {
 //Отображем поле ввода для редактирования элемента
 function dblclickField(calssName, inputClassName) {
     return ($(document).on("dblclick", "."+calssName, (event)=>{
-            let inputElement = '<input class="'+ inputClassName + '"/>'
+            let inputElement;
+            switch (calssName) {
+                case "numberColumn":
+                    inputElement='<input class="'+ inputClassName + '" type="number" maxlength="13"/>'
+                    break;
+                case "nameColumn":
+                    inputElement='<input class="'+ inputClassName + '" maxlength="255"/>'
+                    break;
+            }
             let inEdit = $(inputElement);
             let toEdit = $(event.target);
             toEdit.html( inEdit.val( toEdit.text() ) );
@@ -100,6 +108,7 @@ function focusoutSelect(arrConsumers) {
                         let indexArr = arrConsumers.findIndex(con => con.id === id)
                         arrConsumers[indexArr] = obj;
                         $(this).closest(".typeColunm").html(val==1? "Ф": "Ю");
+                        $(this).closest(".typeColunm").attr("title", obj.type == 1 ? 'Физическое лицо' : 'Юридическое лицо');
                     } else {
                         $(this).closest(".typeColunm").html(arrConsumers[indexArr].type);
                         console.log("Сервер не подтвердил изменения");
@@ -109,6 +118,7 @@ function focusoutSelect(arrConsumers) {
                 let indexArr = arrConsumers.findIndex(con => con.id === id);
                 arrConsumers[indexArr] = obj;
                 $(this).closest(".typeColunm").html(val==1? "Ф": "Ю");
+                $(this).closest(".typeColunm").attr("title", obj.type == 1 ? 'Физическое лицо' : 'Юридическое лицо');
             }
         }
     }));
@@ -176,18 +186,3 @@ export const filterType = (arrConsumers) => {
         }
     })
 }
-// export const dblclickFieldNumber = () => {
-//     return dblclickField("numberColumn","inputNumber");
-// } 
-
-// export const dblclickFieldName = () => {
-//     return dblclickField("nameColumn","inputName");
-// } 
-
-// export const focusoutInputName = () => {
-//     return focusoutInputSome("nameColumn");
-// }
-
-// export const focusoutInputNumber = () => {
-//     return focusoutInputSome("numberColumn");
-// }

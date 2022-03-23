@@ -5,9 +5,9 @@ import Api from "../api/api.js";
 const api = new Api();
 
 export function newConsumer(arrConsum) {
-    if (!$("#inputName").val() && !$("#inputNumber").val()) return;
-    let name = $("#inputName").val();
-    let number = Number($("#inputNumber").val());
+    if (!$("#inputNameNew").val() && !$("#inputNumberNew").val()) return;
+    let name = $("#inputNameNew").val();
+    let number = Number($("#inputNumberNew").val());
     let type = Number($("#selectType").val());
     let body = {name, type, number};
     if (api.isEnabled()) {
@@ -34,18 +34,18 @@ export const showModalNewConsumer = (arrConsumers) => {
         $(".modal, .win").css("display","none");
     });
     //---Валидация---
-    $('#inputNumber').keyup(function () { 
+    $('#inputNumberNew').keyup(function () { 
         this.value = this.value.replace(/[^0-9\.]/g,'');
     });
 
     $("#modalForm").validate({
         rules: {
-            inputName: {
+            inputNameNew: {
                 required: true,
                 minlength: 1,
                 maxlength: 255
             },
-            inputNumber: {
+            inputNumberNew: {
                 required: true,
                 minlength: 13,
                 maxlength: 13,
@@ -53,12 +53,12 @@ export const showModalNewConsumer = (arrConsumers) => {
             }
         },
         messages: {
-            inputName: {
+            inputNameNew: {
                 required: "Пожалуйста, введите имя потребителя.",
                 minlength: "Имя не должно быть короче 1 символа.",
                 maxlength: "Имя не должно быть длиннее 255 символов."
             },
-            inputNumber: {
+            inputNumberNew: {
                 required: "Пожалуйста, введите номер потребителя.",
                 minlength: "Имя не должно быть короче 13 символа.",
                 maxlength: "Имя не должно быть длиннее 13 символов.",
@@ -66,7 +66,7 @@ export const showModalNewConsumer = (arrConsumers) => {
             } 
         },
         submitHandler: function(form) {            
-            if (!$("#inputName").val() && !$("#inputNumber").val()) return;
+            if (!$("#inputNameNew").val() && !$("#inputNumberNew").val()) return;
             $(".modal, .win").css("display","none");
             newConsumer(arrConsumers);        
           }

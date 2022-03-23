@@ -24,14 +24,3 @@ deleteConsumer(arrConsumers);
 editConsumer(arrConsumers);
 
 filterType(arrConsumers);
-
-
-
-// api.getData();
-
-// let jbody = {
-//     title: "Работа",
-//     text: "Test s consumer"
-//   }      
-
-// api.newConsumer(jbody); 
