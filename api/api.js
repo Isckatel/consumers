@@ -2,6 +2,7 @@
 
 export default class Api {
     // basURL="https://blooming-dawn-85383.herokuapp.com/";
+    // Адрес со слешем на конце.
     basURL="";
 
     getData() {
