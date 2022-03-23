@@ -52,11 +52,19 @@ function dblclickField(calssName, inputClassName) {
 
 //Применение изменений после ввода
 function focusoutInputSome(className, propertyName, arrConsumers) {
-    return ($(document).on("focusout keypress", "."+className+" input", function(event) {
+    return ($(document).on("focusout keypress", "."+className+" input", function(event) {          
         if( event.which === 13 || event.type === 'focusout') {
             let val = $(this).val();
             let id = Number($(this).closest(".contentRow").attr("name"));
             let obj = arrConsumers.find(con => con.id === id);
+            if (val == "") {
+                $(this).closest("."+className).text(obj[propertyName]);  
+                return;
+            }
+            if (className == "numberColumn" && val.length<13) {
+                $(this).closest("."+className).text(obj[propertyName]);  
+                return;
+            }    
             obj[propertyName] =  isNaN(val) ? val : Number(val);
             if (api.isEnabled()) {
                 api.editConsumerAsync(obj).then((ok)=>{
@@ -131,6 +139,17 @@ export const editConsumer = (arrConsumers) => {
     focusoutInputSome("numberColumn", "number", arrConsumers);
     dblclickSelect();
     focusoutSelect(arrConsumers);
+    //---Валидация---
+    $(".consumerTab").on('input','.inputNumber' ,function(){
+        if (this.value.length > this.maxLength){
+            this.value = this.value.slice(0, this.maxLength);
+        }
+    });
+    $(".consumerTab").on('input','.inputName' ,function(){
+        if (this.value.length > this.maxLength){
+            this.value = this.value.slice(0, this.maxLength);
+        }
+    });
 }
 
 export const deleteConsumer = (arrConsumers) => {

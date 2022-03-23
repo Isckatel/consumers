@@ -24,3 +24,4 @@ deleteConsumer(arrConsumers);
 editConsumer(arrConsumers);
 
 filterType(arrConsumers);
+
