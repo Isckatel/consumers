@@ -33,9 +33,7 @@ export const showModalNewConsumer = (arrConsumers) => {
     $(".buttCancel").on("click",()=>{
         $(".modal, .win").css("display","none");
     });
-
-    let successValid = false;
-    
+    //---Валидация---
     $('#inputNumber').keyup(function () { 
         this.value = this.value.replace(/[^0-9\.]/g,'');
     });
@@ -67,19 +65,13 @@ export const showModalNewConsumer = (arrConsumers) => {
                 number: "Номер потребителя должен состоять только из цифр."
             } 
         },
-        success: () => successValid = true
-    });
-
-    //Добавляем созданного потребителя в массив
-    $(".buttOK").on("click",()=>{        
-        if (!$("#inputName").val() && !$("#inputNumber").val()) return;
-        if (successValid) {
+        submitHandler: function(form) {            
+            if (!$("#inputName").val() && !$("#inputNumber").val()) return;
             $(".modal, .win").css("display","none");
-            newConsumer(arrConsumers);
-        }
+            newConsumer(arrConsumers);        
+          }
     });
-}
-
-export const validateModal = () => {
-    
+    // $("modalForm").data("validator").settings.submitHandler = function (form) {
+    //      alert('submit'); form.submit(); 
+    // };
 }
