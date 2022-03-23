@@ -1,12 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-/test
-/libraries
-mainfortest.js
-test.js
-test.html
-task.txt
-
+# /test
+# /libraries
+# mainfortest.js
+# test.js
+# test.html
 
 # misc
 .DS_Store
