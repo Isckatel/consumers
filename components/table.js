@@ -5,18 +5,18 @@ export function getTab(arrConsumers) {
     let consumerRow = "";
     arrConsumers.forEach(elem => {
         consumerRow = consumerRow 
-        + `<div class="contentRow" data="${elem.id}">
+        + `<div class="contentRow" data-id="${elem.id}">
         <div class="nameColumn">${elem.name}</div>
         <div class="typeColunm" title="${elem.type == 1 ? 'Физическое лицо' : 'Юридическое лицо'}" >${elem.type == 1 ? "Ф" : "Ю"}</div>
         <div class="numberColumn">${elem.number}</div>
-        <div class="delColumn" data="${elem.id}"><button class="delButt">X</buttnon></div>
+        <div class="delColumn" data-id="${elem.id}"><button class="delButt">X</buttnon></div>
     </div>`
     });
     return `
     <div class="consumerTab">
         <div class="title">
             <div class="nameTitle title">Имя</div>
-            <div class="typeTitle title" data="all">Тип</div>
+            <div class="typeTitle title" data-type="all">Тип</div>
             <div class="numberTitle title">Номер потребителя</div>
             <div class="delTitle title"></div>        
         </div>
@@ -55,7 +55,8 @@ function focusoutInputSome(className, propertyName, arrConsumers) {
     return ($(document).on("focusout keypress", "."+className+" input", function(event) {          
         if( event.which === 13 || event.type === 'focusout') {
             let val = $(this).val();
-            let id = Number($(this).closest(".contentRow").attr("data"));
+            let closestElem = $(this.closest(".contentRow"));
+            let id = Number(closestElem.data("id"));
             let obj = arrConsumers.find(con => con.id === id);
             if (val == "") {
                 $(this).closest("."+className).text(obj[propertyName]);  
@@ -107,7 +108,7 @@ function focusoutSelect(arrConsumers) {
     return ($(document).on("focusout keypress", ".typeColunm select", function(event) {
         if( event.which === 13 || event.type === 'focusout') {
             let val = $(this).val();
-            let id = Number($(this).closest(".contentRow").attr("data"));
+            let id = Number($(this).closest(".contentRow").data("id"));
             let obj = arrConsumers.find(con => con.id === id);
             obj.type = Number(val);
             if (api.isEnabled()) {
@@ -157,7 +158,7 @@ export const deleteConsumer = (arrConsumers) => {
     $(document).on("click", ".delButt", (e)=>{
         $(".modalDel").css("display","block");
         let el = $(e.target).closest(".delColumn");
-        let strId = el.attr("data");
+        let strId = el.data("id");
         id = Number(strId);
     });
     //Скрыть окно создания
@@ -190,15 +191,15 @@ export const deleteConsumer = (arrConsumers) => {
 export const filterType = (arrConsumers) => {
     $(document).on("click",".typeTitle", (event)=>{
         let filterConsumers = [...arrConsumers];
-        let typeCon = $(event.target).attr("data");
+        let typeCon = $(event.target).data("type");
         if (typeCon=="all" ) {
             filterConsumers = filterConsumers.filter(c => c.type === 1);
             $("main").html(getTab(filterConsumers));
-            $(".typeTitle").attr("data","1");
+            $(".typeTitle").data("type","1");
         } else if (typeCon=="1") {
             filterConsumers = filterConsumers.filter(c => c.type === 2);
             $("main").html(getTab(filterConsumers));
-            $(".typeTitle").attr("data","2");  
+            $(".typeTitle").data("type","2");
         } else if (typeCon=="2") {
             $("main").html(getTab(arrConsumers));
             $(".typeTitle").attr("data","all");
